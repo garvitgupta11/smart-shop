@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Shop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg"><span></span><span></span><span></span></div>
+
+<aside>
+  <div class="brand">
+    <div class="logo">🛒</div>
+    <div><h1>Smart Shop</h1><small>Inventory &amp; sales</small></div>
+  </div>
+  <nav>
+    <button class="on" data-tab="dash">📊 Dashboard</button>
+    <button data-tab="inv">📦 Inventory</button>
+    <button data-tab="sales">💰 Sales</button>
+    <button data-tab="alerts">🔔 Alerts <span class="badge" id="badge">0</span></button>
+  </nav>
+</aside>
+
+<main>
+<header class="topbar">
+  <h2>Welcome back 👋</h2>
+  <p id="today"></p>
+</header>
+
+
+<section id="dash" class="on">
+  <h2>Overview</h2>
+  <div class="stats" id="stats"></div>
+  <div class="card"><h3>Needs attention</h3><div id="dashAlerts"></div></div>
+  <div class="card"><h3>Latest sales</h3><div class="wrap" id="dashSales"></div></div>
+</section>
+
+<section id="inv">
+  <h2>Inventory</h2>
+  <div class="card">
+    <h3 id="formTitle">Add product</h3>
+    <form id="pForm">
+      <div><label>Product name<input id="pName" required></label></div>
+      <div><label>Category<input id="pCat" list="cats" required></label><datalist id="cats"></datalist></div>
+      <div><label>Price (₹)<input id="pPrice" type="number" min="0" step="0.01" required></label></div>
+      <div><label>Quantity<input id="pQty" type="number" min="0" required></label></div>
+      <div><label>Low stock at<input id="pMin" type="number" min="0" value="5" required></label></div>
+      <div><label>Expiry date<input id="pExp" type="date"></label></div>
+      <div><button class="btn" id="pSave">Add product</button> <button type="button" class="btn g" id="pCancel" hidden>Cancel</button></div>
+    </form>
+  </div>
+  <div class="card">
+    <div class="tools">
+      <input id="q" type="search" placeholder="Search by name or category">
+      <select id="fStatus">
+        <option value="all">All products</option><option value="low">Low stock</option><option value="out">Out of stock</option>
+        <option value="soon">Expiring soon</option><option value="exp">Expired</option>
+      </select>
+      <select id="fCat"><option value="">All categories</option></select>
+    </div>
+    <div class="wrap"><table>
+      <thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Expiry</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="invBody"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="sales">
+  <h2>Sales</h2>
+  <div class="card">
+    <h3>Record a sale</h3>
+    <form id="sForm">
+      <div><label>Product<select id="sProd" required></select></label></div>
+      <div><label>Quantity<input id="sQty" type="number" min="1" value="1" required></label></div>
+      <div><button class="btn">Record sale</button></div>
+    </form>
+  </div>
+  <div class="card">
+    <h3>Sales records — total ₹<span id="sTotal">0</span></h3>
+    <div class="wrap" id="salesList"></div>
+  </div>
+</section>
+
+<section id="alerts">
+  <h2>Alerts</h2>
+  <div class="card" id="alertList"></div>
+</section>
+
+</main>
+<div id="toast" role="status"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
